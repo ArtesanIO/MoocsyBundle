@@ -43,6 +43,8 @@ class ModulesController extends Controller
 
         $module = $this->get('moocsy.modules_manager')->findOneModuleCourse($course, $module);
 
+        $course = $module->getCourses();
+
         $modulesForm = $this->createForm('moocsy_modules_type', $module)->handleRequest($request);
 
         if($modulesForm->isValid()){

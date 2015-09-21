@@ -3,12 +3,15 @@
 namespace ArtesanIO\MoocsyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Items
  *
  * @ORM\Table(name="moocsy_items")
  * @ORM\Entity(repositoryClass="ArtesanIO\MoocsyBundle\Entity\ItemsRepository")
+ * @UniqueEntity("item")
+ * @UniqueEntity("slug")
  */
 class Items
 {
