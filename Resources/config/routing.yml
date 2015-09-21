@@ -1,0 +1,11 @@
+moocsy_admin:
+    resource: "@MoocsyBundle/Resources/config/routing/admin.yml"
+    prefix: /admin/moocsy/
+
+moocsy_front:
+    resource: "@MoocsyBundle/Resources/config/routing/front.yml"
+    prefix: /
+
+moocsy_apis:
+    resource: "@MoocsyBundle/Resources/config/routing/apis.yml"
+    prefix: /apis

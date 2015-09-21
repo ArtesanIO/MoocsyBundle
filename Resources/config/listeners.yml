@@ -1,0 +1,70 @@
+services:
+    moocsy.nav_menu.listener:
+        class: ArtesanIO\MoocsyBundle\EventListener\MoocsyMenuListener
+        arguments:
+            - @moocsy.notifications_manager
+        tags:
+          - { name: kernel.event_listener, event: artesanus.navbar, method: onArtesanusNavBar }
+
+    moocsy.courses_pre_create:
+        class: ArtesanIO\MoocsyBundle\EventListener\CoursesPreCreateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.courses_pre_create, method: onCoursePreCreate }
+        arguments:
+            - @artesanus.slugger
+            - @security.context
+
+    moocsy.courses_pre_update:
+        class: ArtesanIO\MoocsyBundle\EventListener\CoursesPreUpdateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.courses_pre_update, method: onCoursePreUpdate }
+        arguments:
+            - @security.context
+
+    moocsy.modules_pre_create:
+        class: ArtesanIO\MoocsyBundle\EventListener\ModulesPreCreateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.modules_pre_create, method: onModulePreCreate }
+        arguments:
+            - @artesanus.slugger
+            - @security.context
+
+    moocsy.modules_pre_update:
+        class: ArtesanIO\MoocsyBundle\EventListener\ModulesPreUpdateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.modules_pre_update, method: onModulesPreUpdate }
+        arguments:
+            - @security.context
+
+    moocsy.items_pre_create:
+        class: ArtesanIO\MoocsyBundle\EventListener\ItemsPreCreateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.items_pre_create, method: onItemPreCreate }
+        arguments:
+            - @artesanus.slugger
+            - @security.context
+
+    moocsy.items_pre_update:
+        class: ArtesanIO\MoocsyBundle\EventListener\ItemsPreUpdateListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.items_pre_update, method: onItemPreUpdate }
+        arguments:
+            - @security.context
+
+    moocsy.items_types_listener:
+        class: ArtesanIO\MoocsyBundle\EventListener\ItemsTypesListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.items_types, method: onItemsTypes }
+
+    moocsy.temporalitys:
+        class: ArtesanIO\MoocsyBundle\EventListener\TemporalityListener
+        tags:
+          - { name: kernel.event_listener, event: moocsy.temporality, method: onTemporality }
+
+    moocsy.request_responses:
+        class: ArtesanIO\MoocsyBundle\EventListener\RequestResponseListener
+        arguments:
+            - @artesanus.cartero
+            - @twig
+        tags:
+          - { name: kernel.event_listener, event: moocsy.request_response, method: onRequestResponse }

@@ -1,0 +1,34 @@
+{% extends 'ArtesanusBundle::admin.html.twig' %}
+
+
+{% block artesanus_section_title %}
+
+    Moocsy
+
+{% endblock %}
+
+{% block artesanus_seccion_navbar %}
+
+{% if course is defined %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('moocsy_admin_courses') }}">Courses</a></li>
+        {% if module is defined %}
+            <li><a href="{{ path('moocsy_admin_course', { course: course.slug }) }}">{{ course.course }}</a></li>
+            {% if item is defined %}
+                <li><a href="{{ path('moocsy_admin_course_module', { course: course.slug, module: module.slug }) }}">{{ module.module }}</a></li>
+                {% if question is defined %}
+                    <li><a href="{{ path('moocsy_admin_course_module_item', { course: course.slug, module: module.slug, item:item.slug }) }}">{{ item.item }}</a></li>
+                    <li class="active">{{ question.question }}</li>
+                {% else %}
+                    <li class="active">{{ item.item }}</li>
+                {% endif %}
+            {% else %}
+                <li class="active">{{ module.module }}</li>
+            {% endif %}
+        {% else %}
+            <li class="active">{{ course.course }}</li>
+        {% endif %}
+    </ol>
+{% endif %}
+
+{% endblock %}

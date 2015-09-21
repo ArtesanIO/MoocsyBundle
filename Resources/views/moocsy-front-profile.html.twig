@@ -1,0 +1,22 @@
+{% extends 'MoocsyBundle::moocsy-front.html.twig' %}
+
+{% block moocsy %}
+
+    <div class="col-lg-3">
+        <ul class="list-group">
+            <a href="{{ path('moocsy_front_profile') }}" class="list-group-item {% if app.request.attributes.get('_route') == 'moocsy_front_profile'%} active {% endif %}">Profile</a>
+            <a href="{{ path('moocsy_front_courses') }}" class="list-group-item {% if app.request.attributes.get('_route') == 'moocsy_front_courses'%} active {% endif %}">Courses</a>
+            <a href="{{ path('moocsy_front_notifications') }}" class="list-group-item {% if app.request.attributes.get('_route') == 'moocsy_front_notifications'%} active {% endif %}">Notifications</a>
+        </ul>
+    </div>
+    <div class="col-lg-9">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {% block moocsy_profile %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

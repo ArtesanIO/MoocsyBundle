@@ -1,0 +1,142 @@
+services:
+    moocsy.courses_manager:
+        class: ArtesanIO\MoocsyBundle\Model\CoursesManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\Courses
+            - @security.context
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.modules_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ModulesManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\Modules
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\Items
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_types:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsTypes
+
+    moocsy.items_types_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsTypesManager
+        arguments:
+            - @moocsy.items_types
+            - @moocsy.items_audio_manager
+            - @moocsy.items_audio_down_manager
+            - @moocsy.items_file_manager
+            - @moocsy.items_forum_manager
+            - @moocsy.items_video_manager
+            - @moocsy.items_quiz_manager
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_audio_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsAudioManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsAudio
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_audio_down_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsAudioDownloadManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsAudioDownload
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_file_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsFileManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsFile
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_forum_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsForumManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsForum
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_forum_comments_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsForumCommentsManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsComments
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_video_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsVideoManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsVideo
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.items_quiz_manager:
+        class: ArtesanIO\MoocsyBundle\Model\ItemsQuizManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\ItemsQuiz
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.questions_manager:
+        class: ArtesanIO\MoocsyBundle\Model\QuestionsManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\Questions
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.quiz_details_manager:
+        class: ArtesanIO\MoocsyBundle\Model\QuizDetailsUserManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\QuizDetailsUser
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.temporality:
+        class: ArtesanIO\MoocsyBundle\Model\Temporality
+
+    moocsy.temporality_manager:
+        class: ArtesanIO\MoocsyBundle\Model\TemporalityManager
+        arguments:
+            - @moocsy.temporality
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.notifications_manager:
+        class: ArtesanIO\MoocsyBundle\Model\NotificationsManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\Notifications
+            - @security.context
+            - @artesanus.user_manager
+            - @moocsy.request_response_manager
+        calls:
+            - [setContainer, ['@service_container']]
+
+    moocsy.request_response_manager:
+        class: ArtesanIO\MoocsyBundle\Model\RequestResponseManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\RequestResponse
+        calls:
+            - [setContainer, ['@service_container']]

@@ -1,0 +1,14 @@
+#wrap-moocsy{
+    width: 1200px;
+    margin: auto;
+}
+
+#item-audio-down{
+    width: 100%;
+    float: left;
+    position: relative;
+    background: #429ACE;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}

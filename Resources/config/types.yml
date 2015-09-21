@@ -1,0 +1,79 @@
+services:
+    moocsy.courses_type:
+        class: ArtesanIO\MoocsyBundle\Form\CoursesType
+        arguments:
+            - @moocsy.temporality_manager
+        tags:
+            - { name: form.type, alias: moocsy_courses_type }
+
+    moocsy.course_user_type:
+        class: ArtesanIO\MoocsyBundle\Form\CourseUserType
+        tags:
+            - { name: form.type, alias: moocsy_course_user_type }
+
+    moocsy.modules_type:
+        class: ArtesanIO\MoocsyBundle\Form\ModulesType
+        tags:
+            - { name: form.type, alias: moocsy_modules_type }
+
+    moocsy.items_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsType
+        arguments:
+            - @moocsy.items_types_manager
+        tags:
+            - { name: form.type, alias: moocsy_items_type }
+
+    moocsy.items_audio_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsAudioType
+        tags:
+            - { name: form.type, alias: moocsy_items_audio_type }
+
+    moocsy.items_audio_down_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsAudioDownloadType
+        tags:
+            - { name: form.type, alias: moocsy_items_audio_down_type }
+
+    moocsy.items_file_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsFileType
+        tags:
+            - { name: form.type, alias: moocsy_items_file_type }
+
+    moocsy.items_forum_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsForumType
+        tags:
+            - { name: form.type, alias: moocsy_items_forum_type }
+
+    moocsy.items_forum_comments_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsCommentsType
+        tags:
+            - { name: form.type, alias: moocsy_items_forum_comments_type }
+
+    moocsy.items_quiz_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsQuizType
+        tags:
+            - { name: form.type, alias: moocsy_items_quiz_type }
+
+    moocsy.items_video_type:
+        class: ArtesanIO\MoocsyBundle\Form\ItemsVideoType
+        tags:
+            - { name: form.type, alias: moocsy_items_video_type }
+
+    moocsy.questions_type:
+        class: ArtesanIO\MoocsyBundle\Form\QuestionsType
+        tags:
+            - { name: form.type, alias: moocsy_questions_type }
+
+    moocsy.questions_options_type:
+        class: ArtesanIO\MoocsyBundle\Form\QuestionsOptionsType
+        tags:
+            - { name: form.type, alias: moocsy_questions_options_type }
+
+    moocsy.quiz_details_user_type:
+        class: ArtesanIO\MoocsyBundle\Form\QuizDetailsUserType
+        tags:
+            - { name: form.type, alias: moocsy_quiz_details_user_type }
+
+    moocsy.notifications:
+        class: ArtesanIO\MoocsyBundle\Form\NotificationsType
+        tags:
+            - { name: form.type, alias: moocsy_notifications_type }

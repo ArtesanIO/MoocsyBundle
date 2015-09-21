@@ -1,0 +1,22 @@
+{
+    "name": "artesan-io/moocsy-bundle",
+    "type": "symfony-bundle",
+    "description": "MoocsyBundle",
+    "keywords": ["Mooc", "Elearn", "artesanIO", "ArtesanusBundle"],
+    "homepage": "https://www.cristianangulo.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cristian Angulo Nova",
+            "email": "cristianangulonova@gmail.com",
+            "homepage": "http://cristianangulo.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+      "artesan-io/artesanus-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "ArtesanIO\\MoocsyBundle\\": "" }
+    }
+}
