@@ -1,3 +1,6 @@
+artesanus:
+    resource: "@ArtesanusBundle/Resources/config/routing.yml"
+
 moocsy_admin:
     resource: "@MoocsyBundle/Resources/config/routing/admin.yml"
     prefix: /admin/moocsy/
