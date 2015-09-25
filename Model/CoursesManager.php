@@ -15,15 +15,15 @@ class CoursesManager extends ModelManager
     protected $em;
     protected $class;
     protected $repository;
-    protected $context;
+    protected $security;
 
-    public function __construct(EntityManager $em, $class, SecurityContext $context)
+    public function __construct(EntityManager $em, $class, SecurityContext $security)
     {
         $this->em = $em;
         $this->repository = $this->em->getRepository($class);
         $metadata = $this->em->getClassMetadata($class);
         $this->class = $metadata->name;
-        $this->context = $context;
+        $this->security = $security;
     }
 
     public function setContainer($container) {
@@ -39,7 +39,7 @@ class CoursesManager extends ModelManager
 
     protected function getUser()
     {
-        return $this->context->getToken()->getUser();
+        return $this->security->getToken()->getUser();
     }
 
     public function create()
@@ -165,7 +165,16 @@ class CoursesManager extends ModelManager
 
         $released = array();
 
-        for($i = 0; $i < $this->temporality($course); $i++){
+        if (!$this->security->isGranted("ROLE_ADMIN")) {
+
+            for($i = 0; $i < count($this->temporality($course)); $i++){
+                $released[$modules[$i]] = $modules[$i];
+            }
+
+            return $released;
+        }
+
+        for($i = 0; $i < count($modules); $i++){
             $released[$modules[$i]] = $modules[$i];
         }
 
