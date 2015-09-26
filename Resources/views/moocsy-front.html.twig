@@ -32,7 +32,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% if app.user.name == "" %} {{ app.user.username }} {% else %} {{ app.user.name }} {% endif %} <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('moocsy_front_profile') }}">Profile</a></li>
+            <li><a href="{{ path('artesanus_front_user_profile') }}">Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
           </ul>

@@ -38,20 +38,20 @@ moocsy_front_items_video:
     requirements:
         type: video
 
-moocsy_front_profile:
-    path:     /profile
-    defaults: { _controller: MoocsyBundle:Profile:profile, type: profile }
-    requirements:
-        type: profile
+# moocsy_front_profile:
+#     path:     /profile
+#     defaults: { _controller: MoocsyBundle:Profile:profile, type: profile }
+#     requirements:
+#         type: profile
 
 moocsy_front_courses:
     path:     /courses
-    defaults: { _controller: MoocsyBundle:Profile:courses, type: courses }
+    defaults: { _controller: MoocsyBundle:Courses:coursesProfile, type: courses }
     requirements:
         type: courses
 
 moocsy_front_notifications:
     path:     /notifications
-    defaults: { _controller: MoocsyBundle:Profile:notifications, type: notifications }
+    defaults: { _controller: MoocsyBundle:Notifications:front, type: notifications }
     requirements:
         type: notifications

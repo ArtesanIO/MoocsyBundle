@@ -53,4 +53,35 @@ class NotificationsController extends Controller
             'notifications_form' => $notificationsForm->createView()
         ));
     }
+
+    public function frontAction(Request $request)
+    {
+        if(!$this->isGranted("IS_AUTHENTICATED_FULLY")){
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+
+        $notificationsManager = $this->get('moocsy.notifications_manager');
+
+        $notifications = $notificationsManager->create();
+
+        $notificationsForm = $this->createForm('moocsy_notifications_type', $notifications)->handleRequest($request);
+
+        if($notificationsForm->isValid()){
+
+            $notifications->setRequestResponse(1);
+
+            $notificationsManager->save($notifications);
+
+            $this->get('artesanus.flashers')->add('info','Mensaje creado');
+
+            return $this->redirect($this->generateUrl('moocsy_front_notifications'));
+        }
+
+        $userNotifications = $notificationsManager->findUserNotifications($this->getUser()->getId());
+
+        return $this->render('MoocsyBundle:Profile:notifications.html.twig', array(
+            'notifications_form' => $notificationsForm->createView(),
+            'user_notifications' => $userNotifications
+        ));
+    }
 }

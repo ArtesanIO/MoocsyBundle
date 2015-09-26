@@ -106,4 +106,18 @@ class CoursesController extends Controller
         $this->get('artesanus.flashers')->add('warning','Se ha eliminado un curso');
         return $this->redirect($this->generateUrl('moocsy_admin_courses'));
     }
+
+    public function coursesProfileAction()
+    {
+        if(!$this->isGranted("IS_AUTHENTICATED_FULLY")){
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+
+        $coursesManager = $this->get('moocsy.courses_manager');
+        $courses = $coursesManager->findCoursesUser();
+
+        return $this->render('MoocsyBundle:Profile:courses.html.twig', array(
+            'courses' => $courses
+        ));
+    }
 }
