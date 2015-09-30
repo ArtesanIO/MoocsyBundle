@@ -36,9 +36,6 @@ class CoursesUsersSubscriber implements EventSubscriberInterface
                     'property' => 'name',
                     'expanded' => false,
                     'empty_value' => '--Seleccione--',
-                    // 'attr' => array(
-                    //     'disabled' => true
-                    // )
                 ))
             ;
         }

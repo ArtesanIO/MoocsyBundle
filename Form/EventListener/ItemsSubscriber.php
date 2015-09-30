@@ -39,9 +39,7 @@ class ItemsSubscriber implements EventSubscriberInterface
             $form->add('itemsType', 'choice', array(
                 'choices' => $this->getItemsTypes(),
                 'empty_value' => '--Seleccione--',
-                // 'attr' => array(
-                //     'disabled' => 'disabled'
-                // )
+                'disabled' => true
             ));
         }else{
             $form->add('itemsType', 'choice', array(

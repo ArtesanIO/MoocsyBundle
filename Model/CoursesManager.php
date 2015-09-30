@@ -116,7 +116,11 @@ class CoursesManager extends ModelManager
             if(false === $model->getCoursesUsers()->contains($i)){
                 $this->em->remove($i);
             }
+
+            echo $i->getUsers()->getid()."<br />";
         }
+
+        exit();
 
         $this->update($model);
     }
