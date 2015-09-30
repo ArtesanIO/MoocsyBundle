@@ -31,6 +31,8 @@ class CoursesType extends AbstractType
                 'choices' => $this->temporality->getTemporality(),
                 'empty_value' => '--Seleccione--',
             ))
+            ->add('header')
+            ->add('title')
             ->add('description')
 
         ;

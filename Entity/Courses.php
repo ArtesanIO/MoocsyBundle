@@ -112,6 +112,20 @@ class Courses
      */
     private $sku;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="header", type="string", length=255)
+     */
+    private $header;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100)
+     */
+    private $title;
+
     public function __construct()
     {
         $this->created = new \Datetime('now');
@@ -440,10 +454,56 @@ class Courses
     /**
      * Get sku
      *
-     * @return string 
+     * @return string
      */
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * Set header
+     *
+     * @param string $header
+     * @return Courses
+     */
+    public function setHeader($header)
+    {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
+     * Get header
+     *
+     * @return string 
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Courses
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }
