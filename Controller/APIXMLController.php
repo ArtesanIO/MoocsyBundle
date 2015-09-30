@@ -36,23 +36,23 @@ class APIXMLController extends Controller
          * API XML
          */
 
-        $client = new \SoapClient($baseurl);
+        //$client = new \SoapClient($baseurl);
 
         $token = "5FZ2Z8QIkA7UTZ4BYkoC==";
         $username = "@SoyDonCristian";
         $email = "cristianangulonova@hotmail.com";
         $sku  = "EABR-K14";
 
-        $register = $client->registrar($token, $username, $email, $sku);
+        //$registrar = $client->registrar($token, $username, $email, $sku);
 
-        echo $register;
+        /**
+         * Service
+         */
 
-        // $api = $this->get('moocsy.api_xml');
-        //
-        // $usuario = $api->registrar($token, $username, $email, $sku);
-        //
-        // echo $usuario;
+        $api = $this->get('moocsy.api_xml');
 
-        return new Response($register);
+        $registrar = $api->registrar($token, $username, $email, $sku);
+
+        return new Response($registrar);
     }
 }

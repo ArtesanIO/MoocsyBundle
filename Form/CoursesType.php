@@ -22,6 +22,7 @@ class CoursesType extends AbstractType
     {
         $builder
             ->add('course')
+            ->add('sku')
             ->add('enabled')
             ->add('published','date', array(
                 'placeholder' => array('year' => 'Año', 'month' => 'Mes', 'day' => 'Día'),

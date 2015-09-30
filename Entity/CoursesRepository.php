@@ -22,7 +22,7 @@ class CoursesRepository extends EntityRepository
                      AND c.slug = :course
                     '
             )
-            ->setParameter('course', $course)
+            ->setParameter('course', $course->getSlug())
             ->setParameter('user', $user)
             ->getSingleResult()
             ;

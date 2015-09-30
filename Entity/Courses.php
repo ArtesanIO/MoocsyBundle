@@ -105,6 +105,13 @@ class Courses
 
     private $coursesUsers;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sku", type="string", length=50)
+     */
+    private $sku;
+
     public function __construct()
     {
         $this->created = new \Datetime('now');
@@ -415,5 +422,28 @@ class Courses
     public function getCoursesUsers()
     {
         return $this->coursesUsers;
+    }
+
+    /**
+     * Set sku
+     *
+     * @param string $sku
+     * @return Courses
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get sku
+     *
+     * @return string 
+     */
+    public function getSku()
+    {
+        return $this->sku;
     }
 }

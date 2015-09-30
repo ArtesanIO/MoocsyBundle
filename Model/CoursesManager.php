@@ -4,11 +4,11 @@ namespace ArtesanIO\MoocsyBundle\Model;
 
 use ArtesanIO\MoocsyBundle\Event\MoocsyEvents;
 use ArtesanIO\MoocsyBundle\Event\CoursesEvent;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Security\Core\SecurityContext;
 use ArtesanIO\ArtesanusBundle\Model\ModelManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class CoursesManager extends ModelManager
 {
@@ -56,6 +56,11 @@ class CoursesManager extends ModelManager
     public function findOneBySlug($id)
     {
         return $this->repository->findOneBySlug($id);
+    }
+
+    public function findOneBySKU($id)
+    {
+        return $this->repository->findOneBySku($id);
     }
 
     public function findAll()
@@ -116,9 +121,9 @@ class CoursesManager extends ModelManager
         $this->update($model);
     }
 
-    public function findCourseUser($course)
+    public function findCourseUser($course, $user)
     {
-        return $this->repository->findCourseUser($course, $this->getUser()->getId());
+        return $this->repository->findCourseUser($course, $user->getId());
     }
 
     public function findCoursesUser()

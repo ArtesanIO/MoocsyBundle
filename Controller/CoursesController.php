@@ -76,10 +76,13 @@ class CoursesController extends Controller
     {
         $courseManager = $this->get('moocsy.courses_manager');
 
-        $courseUser = $courseManager->findCourseUser($course);
+        $course = $courseManager->findOneBySlug($course);
+
+        $courseUser = $courseManager->findCourseUser($course, $this->getUser());
 
         if(null === $courseUser){
-            exit('El curso no existe');
+            $this->get('artesanus.flashers')->add('warning','El curso al que estás tratando de acceder no existe');
+            return $this->redirect($this->generateUrl('artesanus_front_user_profile'));
         }
 
         $interval = $courseManager->interval($courseUser);

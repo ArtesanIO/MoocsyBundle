@@ -1,6 +1,6 @@
 <h3>Hola</h3>
 <p>
-  Estás inscrit@ para el curso
+  Estás inscrit@ para el curso <a href="{{ app.request.getSchemeAndHttpHost() }}{{ path( 'moocsy_front_course', { course: course.slug } ) }}">{{ course.course }}</a> 
 </p>
 
 <p>

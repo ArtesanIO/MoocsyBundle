@@ -5,9 +5,9 @@ namespace ArtesanIO\MoocsyBundle\Utils;
 use ArtesanIO\ArtesanusBundle\Model\UserManager;
 use ArtesanIO\ArtesanusBundle\Utils\Cartero;
 use ArtesanIO\ArtesanusBundle\Utils\Encoder;
+use ArtesanIO\MoocsyBundle\Model\CoursesManager;
+use ArtesanIO\MoocsyBundle\Model\CoursesUsersManager;
 use Doctrine\ORM\EntityManager;
-use AppBundle\Entity\ACL\Usuarios;
-use AppBundle\Entity\Admin\Cursos\CursoUsuarios;
 
 class APIxml
 {
@@ -15,13 +15,17 @@ class APIxml
     private $userManager;
     private $cartero;
     private $twig;
+    private $courses;
+    private $coursesUsers;
 
-    public function __construct(EntityManager $em, UserManager $userManager, Cartero $cartero, \Twig_Environment $twig)
+    public function __construct(EntityManager $em, UserManager $userManager, Cartero $cartero, \Twig_Environment $twig, CoursesManager $courses, CoursesUsersManager $coursesUsers)
     {
-        $this->token       = "5FZ2Z8QIkA7UTZ4BYkoC==";
-        $this->userManager = $userManager;
-        $this->cartero     = $cartero;
-        $this->twig        = $twig;
+        $this->token        = "5FZ2Z8QIkA7UTZ4BYkoC==";
+        $this->userManager  = $userManager;
+        $this->cartero      = $cartero;
+        $this->twig         = $twig;
+        $this->courses      = $courses;
+        $this->coursesUsers = $coursesUsers;
     }
 
     public function login($token)
@@ -35,6 +39,7 @@ class APIxml
 
     public function registrar($token, $username = null, $email, $sku = null)
     {
+
         if($this->login($token) == false){
             return 'Incorrect token';
         }
@@ -65,12 +70,30 @@ class APIxml
 
         }
 
-        $msn = $this->twig->render('MoocsyBundle:API:register-course.html.twig');
+        $course = $this->courses->findOneBySKU($sku);
 
-        $this->cartero->msn('cristianangulonova@gmail.com', $msn);
+        if($course != null){
 
-        echo $user->getId();
-        return 'Siga usted';
+            $courseUser = $this->courses->findCourseUser($course, $user);
+
+            if(null === $courseUser){
+
+                $courseUsersManager = $this->coursesUsers;
+                $coursesUsers = $courseUsersManager->create();
+
+                $coursesUsers->setCourses($course);
+                $coursesUsers->setUsers($user);
+
+                $courseUsersManager->save($coursesUsers);
+
+                $msn = $this->twig->render('MoocsyBundle:API:register-course.html.twig', array('course' => $course));
+
+                $this->cartero->msn('cristianangulonova@gmail.com', $msn);
+            }
+
+        }
+
+        return $user->getId();
     }
 }
 

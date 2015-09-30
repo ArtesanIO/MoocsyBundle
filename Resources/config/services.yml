@@ -6,3 +6,5 @@ services:
             - @artesanus.user_manager
             - @artesanus.cartero
             - @twig
+            - @moocsy.courses_manager
+            - @moocsy.courses_users_manager

@@ -8,6 +8,14 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
+    moocsy.courses_users_manager:
+        class: ArtesanIO\MoocsyBundle\Model\CoursesUsersManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\CoursesUsers
+        calls:
+            - [setContainer, ['@service_container']]
+
     moocsy.modules_manager:
         class: ArtesanIO\MoocsyBundle\Model\ModulesManager
         arguments:
