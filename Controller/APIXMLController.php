@@ -28,31 +28,31 @@ class APIXMLController extends Controller
     public function clientAction(Request $request)
     {
 
-        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+        $uri = substr($this->generateUrl('moocsy_apis_xml_server'), 12) . '?wsdl';
 
-        // if($this->container->get('kernel')->getEnvironment() == 'dev'){
-        //     $baseurl = $baseurl.'/app_dev.php';
-        // }
+        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath() . $uri;
 
+        /**
+         * API XML
+         */
 
-
-        $client = new \SoapClient('http://mooc.sy/apis/xml?wsdl');
+        $client = new \SoapClient($baseurl);
 
         $token = "5FZ2Z8QIkA7UTZ4BYkoC==";
         $username = "@SoyDonCristian";
         $email = "cristianangulonova@hotmail.com";
         $sku  = "EABR-K14";
 
-        //$register = $client->registrar($token, $username, $email, $sku);
+        $register = $client->registrar($token, $username, $email, $sku);
 
-        //echo $register;
+        echo $register;
 
-        $api = $this->get('moocsy.api_xml');
+        // $api = $this->get('moocsy.api_xml');
+        //
+        // $usuario = $api->registrar($token, $username, $email, $sku);
+        //
+        // echo $usuario;
 
-        $usuario = $api->registrar($token, $username, $email, $sku);
-
-        echo $usuario;
-
-        return new Response($usuario);
+        return new Response($register);
     }
 }
