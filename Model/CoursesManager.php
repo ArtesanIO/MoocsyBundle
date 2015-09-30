@@ -116,11 +116,7 @@ class CoursesManager extends ModelManager
             if(false === $model->getCoursesUsers()->contains($i)){
                 $this->em->remove($i);
             }
-
-            echo $i->getUsers()->getid()."<br />";
         }
-
-        exit();
 
         $this->update($model);
     }
@@ -201,6 +197,28 @@ class CoursesManager extends ModelManager
         if ($flush) {
             $this->em->flush();
         }
+    }
+
+    public function courseAttachmentsOriginals($model)
+    {
+        $attachments = new ArrayCollection();
+
+        foreach($model->getAttachments() as $attachment){
+            $attachments->add($attachment);
+        }
+
+        return $attachments;
+    }
+
+    public function updateCourseAttachment($model, $original)
+    {
+        foreach($original as $i){
+            if(false === $model->getAttachments()->contains($i)){
+                $this->em->remove($i);
+            }
+        }
+
+        $this->update($model);
     }
 
 }

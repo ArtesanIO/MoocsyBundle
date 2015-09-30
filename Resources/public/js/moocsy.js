@@ -8,11 +8,15 @@ $(document).ready(function(){
     });
 
     $('.add-collection').on('click', function(){
-          ordenesColeccion = $('tbody.collections');
 
-          ordenesColeccion.data('index', ordenesColeccion.find(':input').length);
+        divParent = $(this).parent();
+        formParent = divParent.parent();
 
-          addOrdenForm(ordenesColeccion);
+        ordenesColeccion = formParent.find($('table tbody.collections'));
+
+        ordenesColeccion.data('index', ordenesColeccion.find(':input').length);
+
+        addOrdenForm(ordenesColeccion);
     });
 
     function addOrdenForm(ordenesColeccion){

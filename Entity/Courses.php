@@ -126,6 +126,13 @@ class Courses
      */
     private $title;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ArtesanIO\MoocsyBundle\Entity\CoursesAttachments", mappedBy="courses", cascade={"persist", "remove"})
+     */
+
+    private $attachments;
+
+
     public function __construct()
     {
         $this->created = new \Datetime('now');
@@ -477,7 +484,7 @@ class Courses
     /**
      * Get header
      *
-     * @return string 
+     * @return string
      */
     public function getHeader()
     {
@@ -500,10 +507,43 @@ class Courses
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Add attachments
+     *
+     * @param \ArtesanIO\MoocsyBundle\Entity\CoursesAttachments $attachments
+     * @return Courses
+     */
+    public function addAttachment(\ArtesanIO\MoocsyBundle\Entity\CoursesAttachments $attachments)
+    {
+        $this->attachments[] = $attachments;
+
+        return $this;
+    }
+
+    /**
+     * Remove attachments
+     *
+     * @param \ArtesanIO\MoocsyBundle\Entity\CoursesAttachments $attachments
+     */
+    public function removeAttachment(\ArtesanIO\MoocsyBundle\Entity\CoursesAttachments $attachments)
+    {
+        $this->attachments->removeElement($attachments);
+    }
+
+    /**
+     * Get attachments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttachments()
+    {
+        return $this->attachments;
     }
 }

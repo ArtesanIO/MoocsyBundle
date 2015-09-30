@@ -46,6 +46,8 @@ class CoursesController extends Controller
 
         $coursesUsersOriginales = $coursesManager->coursesUsersOriginales($course);
 
+        $courseAttachmentsOriginals = $coursesManager->courseAttachmentsOriginals($course);
+
         if($coursesForm->isValid()){
             $coursesManager->update($course);
             $this->get('artesanus.flashers')->add('info','El Curso se ha modificado');
@@ -65,10 +67,25 @@ class CoursesController extends Controller
             return $this->redirect($this->generateUrl('moocsy_admin_course', array('course' => $course->getSlug())));
         }
 
+        $courseAttachmentsForm = $this->createForm('moocsy_course_attachments_type', $course)->handleRequest($request);
+
+        if($courseAttachmentsForm->isValid()){
+
+            foreach($course->getAttachments() as $attachment){
+                $attachment->upload();
+                $attachment->setCourses($course);
+            }
+
+            $coursesManager->updateCourseAttachment($course, $courseAttachmentsOriginals);
+            $this->get('artesanus.flashers')->add('info','Se han actualizado los datos de los usuarios del Curso');
+            return $this->redirect($this->generateUrl('moocsy_admin_course', array('course' => $course->getSlug())));
+        }
+
         return $this->render('MoocsyBundle:Courses:course.html.twig', array(
-            'course'           => $course,
-            'courses_form'     => $coursesForm->createView(),
-            'course_user_form' => $courseUserForm->createView()
+            'course'                    => $course,
+            'courses_form'              => $coursesForm->createView(),
+            'course_user_form'          => $courseUserForm->createView(),
+            'course_attachment_form'    => $courseAttachmentsForm->createView()
         ));
     }
 
