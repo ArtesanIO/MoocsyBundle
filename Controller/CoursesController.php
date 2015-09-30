@@ -24,6 +24,7 @@ class CoursesController extends Controller
         $coursesForm = $this->createForm('moocsy_courses_type', $courses)->handleRequest($request);
 
         if($coursesForm->isValid()){
+            $courses->upload();
             $coursesManager->save($courses);
 
             $this->get('artesanus.flashers')->add('info','Se ha creado un nuevo curso');
@@ -49,6 +50,9 @@ class CoursesController extends Controller
         $courseAttachmentsOriginals = $coursesManager->courseAttachmentsOriginals($course);
 
         if($coursesForm->isValid()){
+
+            $course->upload();
+
             $coursesManager->update($course);
             $this->get('artesanus.flashers')->add('info','El Curso se ha modificado');
             return $this->redirect($this->generateUrl('moocsy_admin_course', array('course' => $course->getSlug())));

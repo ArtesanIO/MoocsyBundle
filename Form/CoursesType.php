@@ -22,6 +22,10 @@ class CoursesType extends AbstractType
     {
         $builder
             ->add('course')
+            ->add('file', 'file', array(
+                'label' => 'Cerficaded',
+                'required' => false
+            ))
             ->add('sku')
             ->add('enabled')
             ->add('published','date', array(
@@ -31,8 +35,12 @@ class CoursesType extends AbstractType
                 'choices' => $this->temporality->getTemporality(),
                 'empty_value' => '--Seleccione--',
             ))
-            ->add('header')
-            ->add('title')
+            ->add('header','text', array(
+                'required' => false
+            ))
+            ->add('title','text', array(
+                'required' => false
+            ))
             ->add('description')
 
         ;
