@@ -16,6 +16,11 @@ services:
         tags:
             - { name: form.type, alias: moocsy_course_attachments_type }
 
+    moocsy.courses_covers_type:
+        class: ArtesanIO\MoocsyBundle\Form\CourseCoversType
+        tags:
+            - { name: form.type, alias: moocsy_courses_covers_type }
+
     moocsy.modules_type:
         class: ArtesanIO\MoocsyBundle\Form\ModulesType
         tags:

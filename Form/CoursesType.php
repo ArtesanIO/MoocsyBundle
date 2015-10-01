@@ -22,6 +22,10 @@ class CoursesType extends AbstractType
     {
         $builder
             ->add('course')
+            ->add('coursesCovers', new CoursesCoversType(), array(
+                'label' => 'Cover',
+                'required' => false
+            ))
             ->add('file', 'file', array(
                 'label' => 'Cerficaded',
                 'required' => false

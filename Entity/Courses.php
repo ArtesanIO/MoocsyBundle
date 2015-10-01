@@ -146,6 +146,11 @@ class Courses
      */
     public $path;
 
+    /**
+     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\CoursesCovers", mappedBy="courses", cascade={"persist", "remove"})
+     */
+    private $coursesCovers;
+
     public function __construct()
     {
         $this->created = new \Datetime('now');
@@ -649,5 +654,28 @@ class Courses
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set coursesCovers
+     *
+     * @param \ArtesanIO\MoocsyBundle\Entity\CoursesCovers $coursesCovers
+     * @return Courses
+     */
+    public function setCoursesCovers(\ArtesanIO\MoocsyBundle\Entity\CoursesCovers $coursesCovers = null)
+    {
+        $this->coursesCovers = $coursesCovers;
+
+        return $this;
+    }
+
+    /**
+     * Get coursesCovers
+     *
+     * @return \ArtesanIO\MoocsyBundle\Entity\CoursesCovers 
+     */
+    public function getCoursesCovers()
+    {
+        return $this->coursesCovers;
     }
 }

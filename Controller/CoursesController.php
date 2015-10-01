@@ -53,6 +53,9 @@ class CoursesController extends Controller
 
             $course->upload();
 
+            $course->getCoursesCovers()->setCourses($course);
+            $course->getCoursesCovers()->upload();
+
             $coursesManager->update($course);
             $this->get('artesanus.flashers')->add('info','El Curso se ha modificado');
             return $this->redirect($this->generateUrl('moocsy_admin_course', array('course' => $course->getSlug())));
