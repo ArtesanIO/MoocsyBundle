@@ -52,11 +52,13 @@ class CoursesUsersManager extends ModelManager
      * @return BaseModel
      */
     public function save($model, $flush= true) {
-        //$this->getDispatcher()->dispatch('model_before_save', new ModelEvent($model, $this->getContainer()));
-        //$this->getDispatcher()->dispatch($model->getEventPrefix() . '_before_save', new ModelEvent($model, $this->getContainer()));
+
         $this->_save($model, $flush);
-        //$this->getDispatcher()->dispatch('model_after_save', new ModelEvent($model, $this->getContainer()));
-        //$this->getDispatcher()->dispatch($model->getEventPrefix() . '_after_save', new ModelEvent($model, $this->getContainer()));
+
+        if($model->getCertificateFreedom() == null){
+            $model->setCertificateFreedom($this->dateCertificateFreedom($model));
+        }
+
         return $model;
     }
     /**
@@ -112,6 +114,15 @@ class CoursesUsersManager extends ModelManager
     }
     public function isDebug() {
         return $this->container->get('kernel')->isDebug();
+    }
+
+    public function dateCertificateFreedom($model)
+    {
+        $registered = $model->getRegistered();
+        $temporality = $model->getCourses()->getTemporality();
+        $modules = count($model->getCourses()->getModules());
+        
+        return $registered->add(new \DateInterval('P'. $modules * $temporality .'D'));
     }
 }
 

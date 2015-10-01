@@ -40,6 +40,27 @@ class CoursesUsers
      */
     private $registered;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="certificate_freedom", type="datetime", nullable=true)
+     */
+    private $certificateFreedom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="certified", type="datetime", nullable=true)
+     */
+    private $certified;
+
+    /**
+     * @var \string
+     *
+     * @ORM\Column(name="username_certificate", type="string", nullable=true)
+     */
+    private $usernameCertificate;
+
     public function __construct()
     {
         $this->registered = new \Datetime('now');
@@ -122,5 +143,74 @@ class CoursesUsers
     public function getRegistered()
     {
         return $this->registered;
+    }
+
+    /**
+     * Set certificateFreedom
+     *
+     * @param \DateTime $certificateFreedom
+     * @return CoursesUsers
+     */
+    public function setCertificateFreedom($certificateFreedom)
+    {
+        $this->certificateFreedom = $certificateFreedom;
+
+        return $this;
+    }
+
+    /**
+     * Get certificateFreedom
+     *
+     * @return \DateTime
+     */
+    public function getCertificateFreedom()
+    {
+        return $this->certificateFreedom;
+    }
+
+    /**
+     * Set certified
+     *
+     * @param \DateTime $certified
+     * @return CoursesUsers
+     */
+    public function setCertified($certified)
+    {
+        $this->certified = $certified;
+
+        return $this;
+    }
+
+    /**
+     * Get certified
+     *
+     * @return \DateTime
+     */
+    public function getCertified()
+    {
+        return $this->certified;
+    }
+
+    /**
+     * Set usernameCertificate
+     *
+     * @param string $usernameCertificate
+     * @return CoursesUsers
+     */
+    public function setUsernameCertificate($usernameCertificate)
+    {
+        $this->usernameCertificate = $usernameCertificate;
+
+        return $this;
+    }
+
+    /**
+     * Get usernameCertificate
+     *
+     * @return string
+     */
+    public function getUsernameCertificate()
+    {
+        return $this->usernameCertificate;
     }
 }

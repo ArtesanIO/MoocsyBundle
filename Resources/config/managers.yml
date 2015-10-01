@@ -5,6 +5,7 @@ services:
             - @doctrine.orm.entity_manager
             - ArtesanIO\MoocsyBundle\Entity\Courses
             - @security.context
+            - @moocsy.courses_users_manager
         calls:
             - [setContainer, ['@service_container']]
 

@@ -4,6 +4,7 @@ namespace ArtesanIO\MoocsyBundle\Model;
 
 use ArtesanIO\MoocsyBundle\Event\MoocsyEvents;
 use ArtesanIO\MoocsyBundle\Event\CoursesEvent;
+use ArtesanIO\MoocsyBundle\Model\CoursesUsersManager;
 use ArtesanIO\ArtesanusBundle\Model\ModelManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,14 +17,16 @@ class CoursesManager extends ModelManager
     protected $class;
     protected $repository;
     protected $security;
+    protected $coursesUser;
 
-    public function __construct(EntityManager $em, $class, SecurityContext $security)
+    public function __construct(EntityManager $em, $class, SecurityContext $security, CoursesUsersManager $coursesUser)
     {
-        $this->em = $em;
-        $this->repository = $this->em->getRepository($class);
-        $metadata = $this->em->getClassMetadata($class);
-        $this->class = $metadata->name;
-        $this->security = $security;
+        $this->em           = $em;
+        $this->repository   = $this->em->getRepository($class);
+        $metadata           = $this->em->getClassMetadata($class);
+        $this->class        = $metadata->name;
+        $this->security     = $security;
+        $this->coursesUser  = $coursesUser;
     }
 
     public function setContainer($container) {
@@ -115,7 +118,13 @@ class CoursesManager extends ModelManager
         foreach($original as $i){
             if(false === $model->getCoursesUsers()->contains($i)){
                 $this->em->remove($i);
+            }else{
+                $this->coursesUser->save($i);
             }
+        }
+
+        foreach($model->getCoursesUsers() as $i){
+            $this->coursesUser->save($i);
         }
 
         $this->update($model);
