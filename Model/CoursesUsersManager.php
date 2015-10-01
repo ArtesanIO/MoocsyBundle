@@ -59,6 +59,8 @@ class CoursesUsersManager extends ModelManager
             $model->setCertificateFreedom($this->dateCertificateFreedom($model));
         }
 
+        $this->_save($model, $flush);
+
         return $model;
     }
     /**
@@ -121,7 +123,7 @@ class CoursesUsersManager extends ModelManager
         $registered = $model->getRegistered();
         $temporality = $model->getCourses()->getTemporality();
         $modules = count($model->getCourses()->getModules());
-        
+
         return $registered->add(new \DateInterval('P'. $modules * $temporality .'D'));
     }
 }
