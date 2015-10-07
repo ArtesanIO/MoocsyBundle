@@ -24,7 +24,7 @@ class CoursesCovers
     private $id;
 
     /**
-    * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Courses", inversedBy="coursesCovers")
+    * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Courses", inversedBy="coursesCovers")
     * @ORM\JoinColumn(name="course_id", referencedColumnName="id")
     */
     private $courses;

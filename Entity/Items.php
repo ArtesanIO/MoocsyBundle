@@ -85,17 +85,17 @@ class Items
     private $slug;
 
     /**
-     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsAudio", mappedBy="items", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsAudio", mappedBy="items", cascade={"persist", "remove"})
      */
     private $itemsAudio;
 
     /**
-     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsAudioDownload", mappedBy="items", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsAudioDownload", mappedBy="items", cascade={"persist", "remove"})
      */
     private $itemsAudioDown;
 
     /**
-     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsFile", mappedBy="items", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsFile", mappedBy="items", cascade={"persist", "remove"})
      */
     private $itemsFile;
 
@@ -110,7 +110,7 @@ class Items
     private $itemsQuiz;
 
     /**
-     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsVideo", mappedBy="items", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\ItemsVideo", mappedBy="items", cascade={"persist", "remove"})
      */
     private $itemsVideo;
 

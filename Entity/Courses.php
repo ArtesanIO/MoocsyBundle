@@ -147,7 +147,7 @@ class Courses
     public $path;
 
     /**
-     * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\CoursesCovers", mappedBy="courses", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\CoursesCovers", mappedBy="courses", cascade={"persist", "remove"})
      */
     private $coursesCovers;
 
@@ -672,7 +672,7 @@ class Courses
     /**
      * Get coursesCovers
      *
-     * @return \ArtesanIO\MoocsyBundle\Entity\CoursesCovers 
+     * @return \ArtesanIO\MoocsyBundle\Entity\CoursesCovers
      */
     public function getCoursesCovers()
     {

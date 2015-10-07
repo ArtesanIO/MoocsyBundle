@@ -22,7 +22,7 @@ class ItemsAudio
     private $id;
 
     /**
-    * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Items", inversedBy="itemsAudio")
+    * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Items", inversedBy="itemsAudio")
     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
     */
     private $items;

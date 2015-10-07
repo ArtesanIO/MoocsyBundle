@@ -22,7 +22,7 @@ class ItemsVideo
     private $id;
 
     /**
-    * @ORM\oneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Items", inversedBy="itemsVideo")
+    * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\Items", inversedBy="itemsVideo")
     * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
     */
     private $items;
