@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * CoursesCovers
  *
- * @ORM\Table()
+ * @ORM\Table(name="moocsy_courses_covers")
  * @ORM\Entity(repositoryClass="ArtesanIO\MoocsyBundle\Entity\CoursesCoversRepository")
  */
 class CoursesCovers
