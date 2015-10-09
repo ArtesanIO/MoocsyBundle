@@ -85,6 +85,11 @@
                             <td>
                                 {{ form_widget(attachments.file) }}
                             </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default delete-collection" onclick="deleteCollection(this);">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </td>
                         </tr>
                     {% endmacro %}
 
@@ -119,6 +124,14 @@
                     {{ form_widget(course_user_form._token) }}
                     {% macro courses_users(option) %}
                         <tr>
+                            <td>
+                                {% set user = option.vars.value.users.id|default('') %}
+                                <a href="" type="button" class="btn btn-default">
+
+                                    <span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-list-alt"></span>
+                                </a>
+
+                            </td>
                             <td>{{ form_widget(option.users) }}</td>
                             <td>
                                 {{ option.vars.value.registered|default('')|date('d-m-Y') }}
@@ -134,8 +147,9 @@
                     <table class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>Usuario</th>
-                                <th>Registrado</th>
+                                <th>Dashboard</th>
+                                <th>User</th>
+                                <th>Registered</th>
                                 <th></th>
                             </tr>
                         </thead>
