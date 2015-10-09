@@ -1,0 +1,10 @@
+ArtesanIO\MoocsyBundle\Entity\Courses:
+    course:
+        course: Course
+        slug: course
+        sku: course
+        enabled: 1
+        temporality: 1
+        header: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet
+        description: <sentence()>
+        published: <published()>

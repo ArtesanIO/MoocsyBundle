@@ -1,0 +1,41 @@
+{% macro btn_delete() %}
+
+    <td class="text-right">
+        <button type="button" class="btn btn-default delete-collection" onclick="deleteCollection(this);">
+            <span class="glyphicon glyphicon-trash"></span>
+        </button>
+    </td>
+
+{% endmacro %}
+
+{%- macro courses_users(option) -%}
+    <tr>
+        <td>
+            {% set user = option.vars.value.users.id|default('') %}
+            <a href="" type="button" class="btn btn-default">
+
+                <span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-list-alt"></span>
+            </a>
+        </td>
+        <td>{{ form_widget(option.users) }}</td>
+        <td>
+            {{ option.vars.value.registered|default('')|date('d-m-Y') }}
+        </td>
+        {% import _self as btn %}
+        {{ btn.btn_delete() }}
+    </tr>
+
+{%- endmacro -%}
+
+{% macro course_attachent(attachments) %}
+    <tr>
+        <td>
+            {{ form_widget(attachments.attachment) }}
+        </td>
+        <td>
+            {{ form_widget(attachments.file) }}
+        </td>
+        {% import _self as btn %}
+        {{ btn.btn_delete() }}
+    </tr>
+{% endmacro %}
