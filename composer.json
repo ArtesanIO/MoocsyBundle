@@ -16,6 +16,11 @@
     "require": {
       "artesan-io/artesanus-bundle": "dev-master"
     },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^2.2@dev",
+        "hautelook/alice-bundle": "dev-master"
+
+    },
     "autoload": {
         "psr-4": { "ArtesanIO\\MoocsyBundle\\": "" }
     }
