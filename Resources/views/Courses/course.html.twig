@@ -33,7 +33,6 @@
                 <div class="panel-body">
                     {% if course.modules|length == 0 %}
                         <div class="alert alert-warning">
-
                             No hay módulos creados
                         </div>
                     {% else %}
@@ -55,7 +54,7 @@
                                             <a href="{{ path('moocsy_admin_course_module', {course: course.slug, module: module.slug }) }}" class="btn btn-default">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
-                                            <a href="{{ path('moocsy_admin_course_module_delete', {course: course.slug, module: module.slug }) }}" class="btn btn-default">
+                                            <a href="{{ path('moocsy_admin_course_module_delete', {course: course.slug, module: module.slug }) }}" class="btn btn-default btn-delete">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </div>
