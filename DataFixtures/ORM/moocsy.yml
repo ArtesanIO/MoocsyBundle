@@ -1,5 +1,5 @@
 ArtesanIO\MoocsyBundle\Entity\Courses:
-    course:
+    course1:
         course: Course
         slug: course
         sku: course
@@ -8,3 +8,36 @@ ArtesanIO\MoocsyBundle\Entity\Courses:
         header: Neque porro quisquam est qui dolorem ipsum quia dolor sit amet
         description: <sentence()>
         published: <published()>
+
+ArtesanIO\MoocsyBundle\Entity\Modules:
+    module:
+        module: <module()>
+        slug: <module()>
+        description: <sentence()>
+        courses: @course1
+        creator: @admin
+
+    module{2..21}:
+        module: <module()>
+        slug: <module()><current()>
+        description: <sentence()>
+        courses: @course1
+        creator: @admin
+
+ArtesanIO\MoocsyBundle\Entity\Items:
+    item:
+        item: <items()>
+        slug: <items()>
+        description: <sentence()>
+        description: <sentence()>
+        modules: @module
+        creator: @admin
+        itemsType: <itemsType()>
+
+    item{2..105}:
+        item: <items()>
+        slug: <items()>
+        description: <sentence()>
+        modules: @module*
+        creator: @admin
+        itemsType: <itemsType()>
