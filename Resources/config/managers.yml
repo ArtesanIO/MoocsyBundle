@@ -118,8 +118,9 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - ArtesanIO\MoocsyBundle\Entity\QuizDetailsUser
+            - @artesanus.user_manager
         calls:
-            - [setContainer, ['@service_container']]
+            - [setSecurity, ['@security.context']]
 
     moocsy.temporality:
         class: ArtesanIO\MoocsyBundle\Model\Temporality

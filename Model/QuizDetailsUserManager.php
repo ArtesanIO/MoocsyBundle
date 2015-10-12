@@ -2,10 +2,12 @@
 
 namespace ArtesanIO\MoocsyBundle\Model;
 
+use ArtesanIO\ArtesanusBundle\Model\UserManager;
 use ArtesanIO\MoocsyBundle\Event\MoocsyEvents;
 use ArtesanIO\MoocsyBundle\Event\ItemsEvent;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class QuizDetailsUserManager extends ContainerAware
 {
@@ -13,15 +15,36 @@ class QuizDetailsUserManager extends ContainerAware
     protected $class;
     protected $repository;
     protected $form;
+    protected $security;
+    protected $user;
 
-
-    public function __construct(EntityManager $em, $class)
+    public function __construct(EntityManager $em, $class, UserManager $user)
     {
         $this->em = $em;
         $this->repository = $em->getRepository($class);
         $metadata = $em->getClassMetadata($class);
         $this->class = $metadata->name;
+        $this->user = $user;
 
+    }
+
+    public function setSecurity(SecurityContext $security)
+    {
+        $this->security = $security;
+
+        return $this->security;
+    }
+
+    public function getSecurity()
+    {
+        return $this->security;
+    }
+
+    public function getUser()
+    {
+        $user = $this->user->find($this->getSecurity()->getToken()->getUser()->getId());
+
+        return $user;
     }
 
     public function create()
@@ -52,10 +75,7 @@ class QuizDetailsUserManager extends ContainerAware
 
     public function save($model)
     {
-        // $this->container->get('event_dispatcher')->dispatch(
-        //     MoocsyEvents::MOOCSY_ITEMS_PRE_CREATE, new ItemsEvent($model)
-        // );
-
+        $model->setUsers($this->getUser());
         $this->_save($model);
     }
 

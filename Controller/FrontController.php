@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class FrontController extends Controller
 {
-    
+
 
     public function audioAction($course, $module, $item)
     {
@@ -187,6 +187,7 @@ class FrontController extends Controller
             $quizDetails->setQuestions($questions);
 
             $quizDetails->setValue($formData->getOptions()->getValue());
+
             $quizDetailsUserManager->save($quizDetails);
 
             return $this->redirect($this->generateUrl('moocsy_front_items_quiz', array(

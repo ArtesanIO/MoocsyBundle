@@ -147,55 +147,5 @@ class QuestionsController extends Controller
             'module' => $module->getSlug(),
             'item'   => $item->getSlug()
         )));
-
-        // $optionsOriginales = $questionsManager->optionsOriginales($question);
-        //
-        // $questionForm = $this->createForm('moocsy_questions_type', $question)->handleRequest($request);
-        //
-        // if($questionForm->isValid()){
-        //
-        //     $questions = $questionsManager->update();
-        //
-        //     $this->get('artesanus.flashers')->add('info','Se ha actualizado la pregunta');
-        //
-        //     return $this->redirect($this->generateUrl('moocsy_admin_course_modules_items_quiz_question', array(
-        //         'course'    => $course->getSlug(),
-        //         'module'    => $module->getSlug(),
-        //         'item'      => $item->getSlug(),
-        //         'quiz'      => $quiz->getId(),
-        //         'question'  => $question->getId()
-        //     )));
-        // }
-        //
-        // $questionsOptionsForm = $this->createForm('moocsy_questions_options_type', $question)->handleRequest($request);
-        //
-        // if($questionsOptionsForm->isValid()){
-        //
-        //     foreach($question->getOptions() as $opcion){
-        //         $opcion->setQuestions($question);
-        //     }
-        //
-        //     $questionsManager->updateQuestionsOptions($question, $optionsOriginales);
-        //
-        //     $this->get('artesanus.flashers')->add('info','Se han actualizado las Opciones de la Pregunta');
-        //
-        //     return $this->redirect($this->generateUrl('moocsy_admin_course_modules_items_quiz_question', array(
-        //         'course'    => $course->getSlug(),
-        //         'module'    => $module->getSlug(),
-        //         'item'      => $item->getSlug(),
-        //         'quiz'      => $quiz->getId(),
-        //         'question'  => $question->getId()
-        //     )));
-        // }
-        //
-        // return $this->render('MoocsyBundle:Questions:question.html.twig', array(
-        //     'course'                        => $module->getCourses(),
-        //     'module'                        => $module,
-        //     'item'                          => $item,
-        //     'quiz'                          => $quiz,
-        //     'question'                      => $question,
-        //     'questions_form'                => $questionForm->createView(),
-        //     'questions_options_form'        => $questionsOptionsForm->createView(),
-        // ));
     }
 }

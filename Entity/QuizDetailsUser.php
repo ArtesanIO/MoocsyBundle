@@ -40,6 +40,11 @@ class QuizDetailsUser
      */
     private $value;
 
+    /**
+    * @ORM\ManyToOne(targetEntity="ArtesanIO\ArtesanusBundle\Entity\User", inversedBy="quizDetailsUser")
+    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+    */
+    private $users;
 
     /**
      * Get id
@@ -141,5 +146,28 @@ class QuizDetailsUser
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \ArtesanIO\ArtesanusBundle\Entity\User $users
+     * @return QuizDetailsUser
+     */
+    public function setUsers(\ArtesanIO\ArtesanusBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \ArtesanIO\ArtesanusBundle\Entity\User 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
