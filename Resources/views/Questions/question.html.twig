@@ -1,5 +1,5 @@
 {% extends 'MoocsyBundle::moocsy_admin.html.twig' %}
-
+{% import 'MoocsyBundle::Macros/forms.html.twig' as forms %}
 
 {% block artesanus_section_subtitle %} Cursos {% endblock %}
 
@@ -23,17 +23,6 @@
             <div class="panel-body">
                 <form class="" action="" method="post">
                     {{ form_widget(questions_options_form._token) }}
-                    {% macro questions_options(option) %}
-                        <tr>
-                            <td>{{ form_widget(option.options) }}</td>
-                            <td>{{ form_widget(option.value) }}</td>
-                            <td>
-                                <button type="button" class="btn btn-default delete-collection" onclick="deleteCollection(this);">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    {% endmacro %}
 
                     <table class="table table-condensed">
                         <thead>
@@ -43,9 +32,9 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody class="collections" data-prototype="{{ _self.questions_options(questions_options_form.options.vars.prototype)|e}}">
+                        <tbody class="collections" data-prototype="{{ forms.questions_options(questions_options_form.options.vars.prototype)|e}}">
                             {% for option in questions_options_form.options %}
-                                {{ _self.questions_options(option) }}
+                                {{ forms.questions_options(option) }}
                             {% endfor %}
                         </tbody>
                     </table>

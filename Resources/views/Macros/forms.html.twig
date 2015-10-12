@@ -45,3 +45,12 @@
         {{ btn.btn_delete() }}
     </tr>
 {% endmacro %}
+
+{% macro questions_options(option) %}
+    <tr>
+        <td>{{ form_widget(option.options) }}</td>
+        <td>{{ form_widget(option.value) }}</td>
+        {% import _self as btn %}
+        {{ btn.btn_delete() }}
+    </tr>
+{% endmacro %}
