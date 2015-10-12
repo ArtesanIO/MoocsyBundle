@@ -1,0 +1,23 @@
+{% extends 'MoocsyBundle::moocsy_admin.html.twig' %}
+
+
+{% block artesanus_section_subtitle %} Cursos {% endblock %}
+
+{% block artesanus_section_body %}
+
+    <div class="col-lg-4">
+        <ul class="list-group">
+            <li class="list-group-item">Usuario</li>
+            <li class="list-group-item">Registrado</li>
+            <li class="list-group-item">Registro curso</li>
+        </ul>
+    </div>
+
+
+{% endblock %}
+
+{% block artesanus_js %}
+
+<script src="{{ asset('bundles/moocsy/js/moocsy.js') }}" charset="utf-8"></script>
+
+{% endblock %}

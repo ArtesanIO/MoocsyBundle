@@ -12,10 +12,16 @@
     <tr>
         <td>
             {% set user = option.vars.value.users.id|default('') %}
-            <a href="" type="button" class="btn btn-default">
 
-                <span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-list-alt"></span>
-            </a>
+            {% set user = option.vars.value.users.id|default('') %}
+            {% set course = option.vars.value.courses.slug|default('') %}
+
+            {% if user != null %}
+                <a href="{{ path('moocsy_admin_course_user', {course: course, user: user }) }}" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-list-alt"></span>
+                </a>
+            {% endif %}
+
         </td>
         <td>{{ form_widget(option.users) }}</td>
         <td>

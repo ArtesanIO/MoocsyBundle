@@ -2,6 +2,7 @@
 
 namespace ArtesanIO\MoocsyBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -145,6 +146,17 @@ class CoursesController extends Controller
 
         return $this->render('MoocsyBundle:Profile:courses.html.twig', array(
             'courses' => $courses
+        ));
+    }
+
+    public function userAction($course, $user)
+    {
+
+        $coursesManager = $this->get('moocsy.courses_manager');
+        $course = $coursesManager->findOneBySlug($course);
+
+        return $this->render('MoocsyBundle:Courses:user.html.twig', array(
+            'course'                    => $course,
         ));
     }
 }
