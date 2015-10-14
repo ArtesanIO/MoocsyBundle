@@ -159,4 +159,28 @@ class CoursesController extends Controller
             'course'                    => $course,
         ));
     }
+
+    public function copyAction($course)
+    {
+        $coursesManager = $this->get('moocsy.courses_manager');
+        $course = $coursesManager->findOneBySlug($course);
+
+        $newCourse = $coursesManager->create();
+
+        $quantityCourses = count($coursesManager->findAll()) + 1;
+
+        $newCourse->setCourse($course->getCourse()."-".$quantityCourses);
+        $newCourse->setDescription($course->getDescription());
+        $newCourse->setTemporality($course->getTemporality());
+        $newCourse->setEnabled($course->getEnabled());
+        $newCourse->setPublished($course->getPublished());
+        $newCourse->setSKU($course->getSKU());
+        $newCourse->setPath($course->getPath());
+
+        $coursesManager->save($newCourse);
+
+        $newCourse->setCoursesCovers($course->getCoursesCovers());
+
+        return $this->redirect($this->generateUrl('moocsy_admin_courses'));
+    }
 }
