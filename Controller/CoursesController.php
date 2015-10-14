@@ -52,7 +52,7 @@ class CoursesController extends Controller
 
         if($coursesForm->isValid()){
 
-            $course->upload();
+            //$course->upload();
 
             $course->getCoursesCovers()->setCourses($course);
             $course->getCoursesCovers()->upload();
