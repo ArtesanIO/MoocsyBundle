@@ -611,7 +611,7 @@ class Courses
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/courses/certificades';
+        return 'uploads/courses/certificates';
     }
     public function upload()
     {
@@ -623,12 +623,16 @@ class Courses
         // sanitize it at least to avoid any security issues
         // move takes the target directory and then the
         // target filename to move to
+
+        $fileName = md5(uniqid().$this->getFile()->getClientOriginalName()).'.'.$this->getfile()->guessExtension();
+
         $this->getFile()->move(
             $this->getUploadRootDir(),
-            $this->getFile()->getClientOriginalName()
+            //$this->getFile()->getClientOriginalName()
+            $fileName
         );
         // set the path property to the filename where you've saved the file
-        $this->path = $this->getFile()->getClientOriginalName();
+        $this->path = $fileName;
         // clean up the file property as you won't need it anymore
         $this->file = null;
     }
