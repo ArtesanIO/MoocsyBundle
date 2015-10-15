@@ -162,6 +162,9 @@ class CoursesController extends Controller
 
     public function copyAction($course)
     {
+        /**
+         * Create Course
+         */
         $coursesManager = $this->get('moocsy.courses_manager');
         $course = $coursesManager->findOneBySlug($course);
 
@@ -177,9 +180,50 @@ class CoursesController extends Controller
         $newCourse->setSKU($course->getSKU());
         $newCourse->setPath($course->getPath());
 
+        /**
+         * Persist Course
+         */
+
         $coursesManager->save($newCourse);
 
-        $newCourse->setCoursesCovers($course->getCoursesCovers());
+        /**
+         * Create CourseCovers
+         */
+
+        $coursesCoversManager = $this->get('moocsy.courses_covers_manager');
+        $coursesCovers = $coursesCoversManager->create();
+
+        $coursesCovers->setCourses($newCourse);
+
+        if($course->getCoursesCovers()){
+            $coursesCovers->setPath($course->getCoursesCovers()->getPath());
+        }
+
+
+
+        /**
+         * Persist CourseCovers
+         */
+
+        $coursesCoversManager->save($coursesCovers);
+
+        /**
+         * Create Course Modules
+         */
+
+        foreach($course->getModules() as $module){
+
+            $modulesManager = $this->get('moocsy.modules_manager');
+            $modules = $modulesManager->create();
+
+            $modules->setCourses($newCourse);
+            $modules->setModule($module->getModule());
+            $modules->setDescription($module->getDescription());
+
+            $modulesManager->save($modules);
+
+        }
+
 
         return $this->redirect($this->generateUrl('moocsy_admin_courses'));
     }
