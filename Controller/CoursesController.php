@@ -254,9 +254,117 @@ class CoursesController extends Controller
                 $items->setItemsType($item->getItemsType());
                 $items->setDescription($item->getDescription());
 
-                
+
 
                 $itemsManager->save($items);
+
+
+                switch ($item->getItemsType()) {
+                    case 'items_audio':
+
+                        if($item->getItemsAudio()){
+                            $itemsAudioManager = $this->get('moocsy.items_audio_manager');
+
+                            $itemsAudio = $itemsAudioManager->create();
+
+                            $itemsAudio->setItems($items);
+                            $itemsAudio->setAudio($item->getItemsAudio()->getAudio());
+
+                            $itemsAudioManager->save($itemsAudio);
+                        }
+
+                        break;
+                    case 'items_audio_down':
+
+                        if($item->getItemsAudioDown()){
+
+                            $itemsAudioDownManager = $this->get('moocsy.items_audio_down_manager');
+
+                            $itemsAudioDown = $itemsAudioDownManager->create();
+
+                            $itemsAudioDown->setItems($items);
+                            $itemsAudioDown->setAudio($item->getItemsAudioDown()->getAudio());
+
+                            $itemsAudioDownManager->save($itemsAudioDown);
+                        }
+
+                        break;
+                    case 'items_file':
+
+                        if($item->getItemsFile()){
+
+                            $itemsFileManager = $this->get('moocsy.items_file_manager');
+
+                            $itemsFile = $itemsFileManager->create();
+
+                            $itemsFile->setItems($items);
+                            $itemsFile->setPath($item->getItemsFile()->getPath());
+
+                            $itemsFileManager->save($itemsFile);
+                        }
+
+                        break;
+                    case 'items_forum':
+
+                        if($item->getItemsForum()){
+
+                            $itemsForumManager = $this->get('moocsy.items_forum_manager');
+
+                            $itemsForum = $itemsForumManager->create();
+
+                            $itemsForum->setItems($items);
+                            $itemsForum->setForum($item->getItemsForum()->getForum());
+
+                            $itemsForumManager->save($itemsForum);
+                        }
+
+                        break;
+                    case 'items_video':
+
+                        if($item->getItemsVideo()){
+
+                            $itemsVideoManager = $this->get('moocsy.items_video_manager');
+
+                            $itemsVideo = $itemsVideoManager->create();
+
+                            $itemsVideo->setItems($items);
+                            $itemsVideo->setVideo($item->getItemsVideo()->getVideo());
+
+                            $itemsVideoManager->save($itemsVideo);
+                        }
+
+                        break;
+                    case 'items_quiz':
+
+                        if($item->getItemsQuiz()){
+
+                            $itemsQuizManager = $this->get('moocsy.items_quiz_manager');
+
+                            $itemsQuiz = $itemsQuizManager->create();
+
+                            $itemsQuiz->setItems($items);
+                            $itemsQuiz->setQuiz($item->getItemsQuiz()->getQuiz());
+
+                            $itemsQuizManager->save($itemsQuiz);
+
+                            if($item->getItemsQuiz()->getQuestions()){
+
+                                foreach($item->getItemsQuiz()->getQuestions() as $question){
+
+                                    $questionsManager = $this->get('moocsy.questions_manager');
+                                    $questions = $questionsManager->create();
+
+                                    $questions->setItemsQuiz($itemsQuiz);
+                                    $questions->setQuestion($question->getQuestion());
+
+                                    $questionsManager->save($questions);
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
 
             }
 
