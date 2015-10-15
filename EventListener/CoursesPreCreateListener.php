@@ -26,7 +26,9 @@ class CoursesPreCreateListener
         $course = $event->getCourse();
         $user = $this->security->getToken()->getUser();
 
-        $course->setSlug($this->slug->slugify($course->getCourse()));
+        $sluger = substr(md5(uniqid().$this->slug->slugify($course->getCourse())), 0, 8);
+
+        $course->setSlug($sluger);
         $course->setCreator($user);
     }
 

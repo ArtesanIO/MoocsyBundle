@@ -26,7 +26,9 @@ class ItemsPreCreateListener
         $item = $event->getItem();
         $user = $this->security->getToken()->getUser();
 
-        $item->setSlug($this->slug->slugify($item->getItem()));
+        $sluger = substr(md5(uniqid().$this->slug->slugify($item->getItem())), 0, 8);
+
+        $item->setSlug($sluger);
         $item->setCreator($user);
     }
 

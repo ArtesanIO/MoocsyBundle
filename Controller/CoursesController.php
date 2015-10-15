@@ -104,7 +104,7 @@ class CoursesController extends Controller
         $course = $courseManager->findOneBySlug($course);
 
         $courseUser = $courseManager->findCourseUser($course, $this->getUser());
-
+        
         if(null === $courseUser){
             $this->get('artesanus.flashers')->add('warning','El curso al que estás tratando de acceder no existe');
             return $this->redirect($this->generateUrl('artesanus_front_user_profile'));

@@ -26,7 +26,9 @@ class ModulesPreCreateListener
         $module = $event->getModule();
         $user = $this->security->getToken()->getUser();
 
-        $module->setSlug($this->slug->slugify($module->getModule()));
+        $sluger = substr(md5(uniqid().$this->slug->slugify($module->getModule())), 0, 8);
+
+        $module->setSlug($sluger);
         $module->setCreator($user);
     }
 

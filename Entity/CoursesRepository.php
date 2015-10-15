@@ -12,6 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class CoursesRepository extends EntityRepository
 {
+
+
+    public function findAll()
+    {
+        try {
+            return $this->getEntityManager()->createQuery(
+                'SELECT c FROM MoocsyBundle:Courses c
+                 ORDER BY c.id ASC
+                '
+            )
+            ->getResult();
+
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+
+    }
+
+
     public function findCourseUser($course, $user)
     {
         try {
