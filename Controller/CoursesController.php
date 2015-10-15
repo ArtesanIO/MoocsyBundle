@@ -104,7 +104,7 @@ class CoursesController extends Controller
         $course = $courseManager->findOneBySlug($course);
 
         $courseUser = $courseManager->findCourseUser($course, $this->getUser());
-        
+
         if(null === $courseUser){
             $this->get('artesanus.flashers')->add('warning','El curso al que estás tratando de acceder no existe');
             return $this->redirect($this->generateUrl('artesanus_front_user_profile'));
@@ -186,26 +186,48 @@ class CoursesController extends Controller
 
         $coursesManager->save($newCourse);
 
-        /**
-         * Create CourseCovers
-         */
-
-        $coursesCoversManager = $this->get('moocsy.courses_covers_manager');
-        $coursesCovers = $coursesCoversManager->create();
-
-        $coursesCovers->setCourses($newCourse);
-
         if($course->getCoursesCovers()){
+
+            /**
+             * Create CourseCovers
+             */
+
+            $coursesCoversManager = $this->get('moocsy.courses_covers_manager');
+            $coursesCovers = $coursesCoversManager->create();
+
+            $coursesCovers->setCourses($newCourse);
             $coursesCovers->setPath($course->getCoursesCovers()->getPath());
+
+            /**
+             * Persist CourseCovers
+             */
+
+            $coursesCoversManager->save($coursesCovers);
         }
 
+        if($course->getAttachments()){
 
+            foreach($course->getAttachments() as $attachment){
 
-        /**
-         * Persist CourseCovers
-         */
+                /**
+                 * Create CourseAttachments
+                 */
 
-        $coursesCoversManager->save($coursesCovers);
+                $coursesAttachmentsManager = $this->get('moocsy.courses_attachments_manager');
+                $coursesAttachments = $coursesAttachmentsManager->create();
+
+                $coursesAttachments->setCourses($newCourse);
+                $coursesAttachments->setAttachment($attachment->getAttachment());
+                $coursesAttachments->setPath($attachment->getPath());
+
+                /**
+                 * Persist CourseCovers
+                 */
+
+                $coursesAttachmentsManager->save($coursesAttachments);
+            }
+
+        }
 
         /**
          * Create Course Modules

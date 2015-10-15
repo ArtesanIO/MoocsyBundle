@@ -17,6 +17,14 @@ services:
         calls:
             - [setContainer, ['@service_container']]
 
+    moocsy.courses_attachments_manager:
+        class: ArtesanIO\MoocsyBundle\Model\CoursesAttachmentsManager
+        arguments:
+            - @doctrine.orm.entity_manager
+            - ArtesanIO\MoocsyBundle\Entity\CoursesAttachments
+        calls:
+            - [setContainer, ['@service_container']]
+
     moocsy.courses_users_manager:
         class: ArtesanIO\MoocsyBundle\Model\CoursesUsersManager
         arguments:
