@@ -170,9 +170,9 @@ class CoursesController extends Controller
 
         $newCourse = $coursesManager->create();
 
-        $quantityCourses = count($coursesManager->findAll()) + 1;
+        //$quantityCourses = count($coursesManager->findAll()) + 1;
 
-        $newCourse->setCourse($course->getCourse()."-".$quantityCourses);
+        $newCourse->setCourse($course->getCourse());
         $newCourse->setDescription($course->getDescription());
         $newCourse->setTemporality($course->getTemporality());
         $newCourse->setEnabled($course->getEnabled());
@@ -243,6 +243,22 @@ class CoursesController extends Controller
             $modules->setDescription($module->getDescription());
 
             $modulesManager->save($modules);
+
+            foreach($module->getItems() as $item){
+
+                $itemsManager = $this->get('moocsy.items_manager');
+                $items = $itemsManager->create();
+
+                $items->setModules($modules);
+                $items->setItem($item->getItem());
+                $items->setItemsType($item->getItemsType());
+                $items->setDescription($item->getDescription());
+
+                
+
+                $itemsManager->save($items);
+
+            }
 
         }
 
