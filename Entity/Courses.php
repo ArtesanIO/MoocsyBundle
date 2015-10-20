@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="moocsy_courses")
  * @ORM\Entity(repositoryClass="ArtesanIO\MoocsyBundle\Entity\CoursesRepository")
  * @ORM\HasLifecycleCallbacks
- * @UniqueEntity("course")
  * @UniqueEntity("slug")
  */
 class Courses
