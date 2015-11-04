@@ -17,7 +17,12 @@ class ModulesType extends AbstractType
         $builder
             ->add('module')
             ->add('description')
-            //->add('position')
+            ->add('mail', null, array(
+                'attr' => array(
+                    'class' => 'ckeditor',
+                    'rows' => 10
+                )
+            ))
         ;
     }
 
