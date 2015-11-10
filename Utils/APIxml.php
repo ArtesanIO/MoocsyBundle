@@ -66,7 +66,7 @@ class APIxml
 
             $msn = $this->twig->render('MoocsyBundle:API:register.html.twig', array('user' => $user, 'password' => $rand));
 
-            $this->cartero->msn('cristianangulonova@gmail.com', $msn);
+            $this->cartero->msn($email, $msn);
 
         }
 
@@ -88,7 +88,7 @@ class APIxml
 
                 $msn = $this->twig->render('MoocsyBundle:API:register-course.html.twig', array('course' => $course));
 
-                $this->cartero->msn('cristianangulonova@gmail.com', $msn);
+                $this->cartero->msn($email, $msn);
             }
 
         }
