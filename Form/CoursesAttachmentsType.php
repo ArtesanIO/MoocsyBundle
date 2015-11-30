@@ -16,8 +16,10 @@ class CoursesAttachmentsType extends AbstractType
     {
         $builder
             ->add('attachment')
-            ->add('file','file', array(
-                'required' => false,
+            ->add('file', 'entity', array(
+                'class' => 'ArtesanusBundle:Files',
+                'property' => 'name',
+                'empty_value' => '--Seleccione--'
             ))
         ;
     }

@@ -136,15 +136,32 @@ class Courses
     private $attachments;
 
     /**
-     * @Assert\File(maxSize="6000000")
-     */
+    * @ORM\ManyToOne(targetEntity="ArtesanIO\ArtesanusBundle\Entity\Categories")
+    * @ORM\JoinColumn(name="cover_category_id", referencedColumnName="id")
+    */
 
-    private $file;
+    private $coverCategory;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    public $path;
+    * @ORM\ManyToOne(targetEntity="ArtesanIO\ArtesanusBundle\Entity\Files")
+    * @ORM\JoinColumn(name="cover_id", referencedColumnName="id")
+    */
+
+    private $cover;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="ArtesanIO\ArtesanusBundle\Entity\Categories")
+    * @ORM\JoinColumn(name="certificate_category_id", referencedColumnName="id")
+    */
+
+    private $certificateCategory;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="ArtesanIO\ArtesanusBundle\Entity\Files")
+    * @ORM\JoinColumn(name="certificate_id", referencedColumnName="id")
+    */
+
+    private $certificate;
 
     /**
      * @ORM\OneToOne(targetEntity="ArtesanIO\MoocsyBundle\Entity\CoursesCovers", mappedBy="courses", cascade={"persist", "remove"})
@@ -306,26 +323,26 @@ class Courses
     }
 
     /**
-     * Set creator
+     * Set published
      *
-     * @param \ArtesanIO\ArtesanusBundle\Entity\User $creator
+     * @param \DateTime $published
      * @return Courses
      */
-    public function setCreator(\ArtesanIO\ArtesanusBundle\Entity\User $creator = null)
+    public function setPublished($published)
     {
-        $this->creator = $creator;
+        $this->published = $published;
 
         return $this;
     }
 
     /**
-     * Get creator
+     * Get published
      *
-     * @return \ArtesanIO\ArtesanusBundle\Entity\User
+     * @return \DateTime
      */
-    public function getCreator()
+    public function getPublished()
     {
-        return $this->creator;
+        return $this->published;
     }
 
     /**
@@ -349,6 +366,98 @@ class Courses
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set sku
+     *
+     * @param string $sku
+     * @return Courses
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
+     * Set header
+     *
+     * @param string $header
+     * @return Courses
+     */
+    public function setHeader($header)
+    {
+        $this->header = $header;
+
+        return $this;
+    }
+
+    /**
+     * Get header
+     *
+     * @return string
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Courses
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set creator
+     *
+     * @param \ArtesanIO\ArtesanusBundle\Entity\User $creator
+     * @return Courses
+     */
+    public function setCreator(\ArtesanIO\ArtesanusBundle\Entity\User $creator = null)
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    /**
+     * Get creator
+     *
+     * @return \ArtesanIO\ArtesanusBundle\Entity\User
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 
     /**
@@ -408,29 +517,6 @@ class Courses
     }
 
     /**
-     * Set published
-     *
-     * @param \DateTime $published
-     * @return Courses
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-
-        return $this;
-    }
-
-    /**
-     * Get published
-     *
-     * @return \DateTime
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    /**
      * Add coursesUsers
      *
      * @param \ArtesanIO\MoocsyBundle\Entity\CoursesUsers $coursesUsers
@@ -461,103 +547,6 @@ class Courses
     public function getCoursesUsers()
     {
         return $this->coursesUsers;
-    }
-
-    /**
-     * Set sku
-     *
-     * @param string $sku
-     * @return Courses
-     */
-    public function setSku($sku)
-    {
-        $this->sku = $sku;
-
-        return $this;
-    }
-
-    /**
-     * Get sku
-     *
-     * @return string
-     */
-    public function getSku()
-    {
-        return $this->sku;
-    }
-
-    /**
-     * Set header
-     *
-     * @param string $header
-     * @return Courses
-     */
-    public function setHeader($header)
-    {
-        $this->header = $header;
-
-        return $this;
-    }
-
-    /**
-     * Get header
-     *
-     * @return string
-     */
-    public function getHeader()
-    {
-        return $this->header;
-    }
-
-    /**
-     * Set file
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        // check if we have an old image path
-        if (isset($this->path)) {
-            // store the old name to delete after the update
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = 'initial';
-        }
-    }
-
-    /**
-     * Get file
-     *
-     * @return integer
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Courses
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -593,103 +582,50 @@ class Courses
         return $this->attachments;
     }
 
-
-    public function getAbsolutePath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
-    }
-    public function getWebPath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
-    }
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/courses/certificates';
-    }
-
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        if (null !== $this->getFile()) {
-            // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->guessExtension();
-        }
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-
-    public function upload()
-    {
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        // if there is an error when moving the file, an exception will
-        // be automatically thrown by move(). This will properly prevent
-        // the entity from being persisted to the database on error
-        $this->getFile()->move($this->getUploadRootDir(), $this->path);
-
-        // check if we have an old image
-        if (isset($this->temp)) {
-            // delete the old image
-            unlink($this->getUploadRootDir().'/'.$this->temp);
-            // clear the temp image path
-            $this->temp = null;
-        }
-        $this->file = null;
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        $file = $this->getAbsolutePath();
-        if ($file) {
-            unlink($file);
-        }
-    }
-
-    /**
-     * Set path
+     * Set cover
      *
-     * @param string $path
-     * @return CoursesAttachments
+     * @param \ArtesanIO\ArtesanusBundle\Entity\Files $cover
+     * @return Courses
      */
-    public function setPath($path)
+    public function setCover(\ArtesanIO\ArtesanusBundle\Entity\Files $cover = null)
     {
-        $this->path = $path;
+        $this->cover = $cover;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get cover
      *
-     * @return string
+     * @return \ArtesanIO\ArtesanusBundle\Entity\Files
      */
-    public function getPath()
+    public function getCover()
     {
-        return $this->path;
+        return $this->cover;
+    }
+
+    /**
+     * Set certificate
+     *
+     * @param \ArtesanIO\ArtesanusBundle\Entity\Files $certificate
+     * @return Courses
+     */
+    public function setCertificate(\ArtesanIO\ArtesanusBundle\Entity\Files $certificate = null)
+    {
+        $this->certificate = $certificate;
+
+        return $this;
+    }
+
+    /**
+     * Get certificate
+     *
+     * @return \ArtesanIO\ArtesanusBundle\Entity\Files
+     */
+    public function getCertificate()
+    {
+        return $this->certificate;
     }
 
     /**
@@ -713,5 +649,51 @@ class Courses
     public function getCoursesCovers()
     {
         return $this->coursesCovers;
+    }
+
+    /**
+     * Set coverCategory
+     *
+     * @param \ArtesanIO\ArtesanusBundle\Entity\Categories $coverCategory
+     * @return Courses
+     */
+    public function setCoverCategory(\ArtesanIO\ArtesanusBundle\Entity\Categories $coverCategory = null)
+    {
+        $this->coverCategory = $coverCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get coverCategory
+     *
+     * @return \ArtesanIO\ArtesanusBundle\Entity\Categories 
+     */
+    public function getCoverCategory()
+    {
+        return $this->coverCategory;
+    }
+
+    /**
+     * Set certificateCategory
+     *
+     * @param \ArtesanIO\ArtesanusBundle\Entity\Categories $certificateCategory
+     * @return Courses
+     */
+    public function setCertificateCategory(\ArtesanIO\ArtesanusBundle\Entity\Categories $certificateCategory = null)
+    {
+        $this->certificateCategory = $certificateCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get certificateCategory
+     *
+     * @return \ArtesanIO\ArtesanusBundle\Entity\Categories 
+     */
+    public function getCertificateCategory()
+    {
+        return $this->certificateCategory;
     }
 }

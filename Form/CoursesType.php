@@ -6,6 +6,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ArtesanIO\MoocsyBundle\Model\TemporalityManager as Temporality;
+
+use ArtesanIO\ArtesanusBundle\Entity\Files;
+
 class CoursesType extends AbstractType
 {
     protected $temporality;
@@ -22,13 +25,15 @@ class CoursesType extends AbstractType
     {
         $builder
             ->add('course')
-            ->add('coursesCovers', new CoursesCoversType(), array(
-                'label' => 'Cover',
-                'required' => false
+            ->add('cover','entity', array(
+                'class' => 'ArtesanusBundle:Files',
+                'property' => 'name',
+                'empty_value' => '--Seleccione--'
             ))
-            ->add('file', 'file', array(
-                'label' => 'Cerficaded',
-                'required' => false
+            ->add('certificate','entity', array(
+                'class' => 'ArtesanusBundle:Files',
+                'property' => 'name',
+                'empty_value' => '--Seleccione--'
             ))
             ->add('sku')
             ->add('enabled')
