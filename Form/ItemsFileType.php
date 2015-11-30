@@ -15,7 +15,11 @@ class ItemsFileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file','file')
+            ->add('files','entity', array(
+                'class' => 'ArtesanusBundle:Files',
+                'property' => 'name',
+                'empty_value' => '--Seleccione--'
+            ))
         ;
     }
 

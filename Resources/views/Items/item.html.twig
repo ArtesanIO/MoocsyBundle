@@ -52,8 +52,8 @@
 
     {% if item.itemsType == 'items_file' %}
         <div class="col-lg-4">
-            {% if item.itemsFile.path is defined %}
-                <embed src="{{ asset('uploads/documents/') }}{{ item.itemsFile.path }}#toolbar=0" width="100%" height="281">
+            {% if item.itemsFile.files is defined %}
+                <embed src="{{ asset('uploads/') }}{{ item.itemsFile.files.categories.slug }}/{{ item.itemsFile.files.path }}#toolbar=0" width="100%" height="281">
             {% endif %}
         </div>
     {% endif %}

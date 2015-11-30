@@ -122,7 +122,6 @@ class ItemsTypesManager extends ContainerAware
                 return $this->audio_down->save($model);
                 break;
             case 'items_file':
-                $model->upload();
                 return $this->file->save($model);
                 break;
             case 'items_forum':
