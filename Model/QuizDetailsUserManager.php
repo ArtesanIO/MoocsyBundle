@@ -2,10 +2,10 @@
 
 namespace ArtesanIO\MoocsyBundle\Model;
 
-use ArtesanIO\ArtesanusBundle\Model\UserManager;
 use ArtesanIO\MoocsyBundle\Event\MoocsyEvents;
 use ArtesanIO\MoocsyBundle\Event\ItemsEvent;
 use Doctrine\ORM\EntityManager;
+use FOS\UserBundle\Model\UserManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\SecurityContext;
 

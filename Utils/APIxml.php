@@ -2,12 +2,12 @@
 
 namespace ArtesanIO\MoocsyBundle\Utils;
 
-use ArtesanIO\ArtesanusBundle\Model\UserManager;
 use ArtesanIO\ArtesanusBundle\Utils\Cartero;
 use ArtesanIO\ArtesanusBundle\Utils\Encoder;
 use ArtesanIO\MoocsyBundle\Model\CoursesManager;
 use ArtesanIO\MoocsyBundle\Model\CoursesUsersManager;
 use Doctrine\ORM\EntityManager;
+use FOS\UserBundle\Model\UserManager;
 
 class APIxml
 {

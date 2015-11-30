@@ -19,7 +19,7 @@ class MoocsyMenuListener
     public function onArtesanusNavBar(ArtesanusMenuEvent $event)
     {
         $menu = $event->getMenu();
-        
+
         $notifications = count($this->notifications->findNotificationsUnanswered());
 
         $menu->addChild('Moocsy', array('route' => 'moocsy_admin_courses'));

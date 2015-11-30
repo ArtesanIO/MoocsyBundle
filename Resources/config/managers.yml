@@ -134,7 +134,7 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - ArtesanIO\MoocsyBundle\Entity\QuizDetailsUser
-            - @artesanus.user_manager
+            - @fos_user.user_manager
         calls:
             - [setSecurity, ['@security.context']]
 
@@ -154,7 +154,7 @@ services:
             - @doctrine.orm.entity_manager
             - ArtesanIO\MoocsyBundle\Entity\Notifications
             - @security.context
-            - @artesanus.user_manager
+            - @fos_user.user_manager
             - @moocsy.request_response_manager
         calls:
             - [setContainer, ['@service_container']]

@@ -1,5 +1,5 @@
 artesanus:
-    resource: "@ArtesanusBundle/Resources/config/routing.yml"
+    resource: "@ArtesanusBundle/Resources/config/routing/artesanus.yml"
 
 moocsy_admin:
     resource: "@MoocsyBundle/Resources/config/routing/admin.yml"

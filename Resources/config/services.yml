@@ -3,7 +3,7 @@ services:
         class: ArtesanIO\MoocsyBundle\Utils\APIxml
         arguments:
             - @doctrine.orm.entity_manager
-            - @artesanus.user_manager
+            - @fos_user.user_manager
             - @artesanus.cartero
             - @twig
             - @moocsy.courses_manager
