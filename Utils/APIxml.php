@@ -44,10 +44,10 @@ class APIxml
             return 'Incorrect token';
         }
 
-        $user = $this->userManager->findOneByEmail($email);
+        $user = $this->userManager->findUserByEmail($email);
 
         if($user == null){
-            $user = $this->userManager->create();
+            $user = $this->userManager->createUser();
 
             $rand = md5(rand(0,99999));
 
@@ -62,7 +62,7 @@ class APIxml
             $user->setEnabled(1);
             $user->setRoles(array('ROLE_REGISTERED'));
 
-            $this->userManager->save($user);
+            $this->userManager->updateUser($user);
 
             $msn = $this->twig->render('MoocsyBundle:API:register.html.twig', array('user' => $user, 'password' => $rand));
 

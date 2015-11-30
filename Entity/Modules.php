@@ -88,7 +88,7 @@ class Modules
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="text")
+     * @ORM\Column(name="mail", type="text", nullable=true)
      */
     private $mail;
 
@@ -364,7 +364,7 @@ class Modules
     /**
      * Get mail
      *
-     * @return string 
+     * @return string
      */
     public function getMail()
     {

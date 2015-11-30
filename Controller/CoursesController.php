@@ -178,7 +178,8 @@ class CoursesController extends Controller
         $newCourse->setEnabled($course->getEnabled());
         $newCourse->setPublished($course->getPublished());
         $newCourse->setSKU($course->getSKU());
-        $newCourse->setPath($course->getPath());
+        $newCourse->setCover($course->getCover());
+        $newCourse->setCertificate($course->getCertificate());
 
         /**
          * Persist Course
@@ -218,7 +219,7 @@ class CoursesController extends Controller
 
                 $coursesAttachments->setCourses($newCourse);
                 $coursesAttachments->setAttachment($attachment->getAttachment());
-                $coursesAttachments->setPath($attachment->getPath());
+                $coursesAttachments->setFile($attachment->getFile());
 
                 /**
                  * Persist CourseCovers
